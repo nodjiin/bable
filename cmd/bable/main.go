@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/nodjiin/bable/internal/pkg/usg"
 )
 
 const (
@@ -13,8 +15,7 @@ const (
 
 func main() {
 	if len(os.Args) == 1 {
-		// TODO print mode/argument description
-		fmt.Println("Usage 'bable <mode> [arguments]'")
+		usg.Base()
 		os.Exit(0)
 	}
 
