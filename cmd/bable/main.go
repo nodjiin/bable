@@ -1,14 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"os"
-	"strings"
 
 	"github.com/nodjiin/bable/internal/pkg/usg"
 )
 
 const (
+	hlpStr = "help"
 	srvStr = "server"
 	clcStr = "client"
 )
@@ -20,12 +19,25 @@ func main() {
 	}
 
 	mode := os.Args[1]
-	if mode == srvStr {
+	if mode == hlpStr {
+		if len(os.Args) == 2 {
+			usg.Help()
+			os.Exit(0)
+		}
+
+		str := os.Args[2]
+		if mode == srvStr {
+			usg.Srv()
+		} else if mode == clcStr {
+			usg.Clc()
+		} else {
+			usg.UnkHelp(str)
+		}
+	} else if mode == srvStr {
 
 	} else if mode == clcStr {
 
 	} else {
-		fmt.Printf("%s: Unknown mode\n Run 'bable' for help on usage", strings.Join(os.Args[:2], " "))
-		os.Exit(1)
+		usg.UnkMode(mode)
 	}
 }
