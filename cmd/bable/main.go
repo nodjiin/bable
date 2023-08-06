@@ -22,7 +22,7 @@ var maxCh = flag.Int("mc", 1024, "max number of characters for a single message"
 func main() {
 	flag.Parse()
 	args := flag.Args()
-	if len(args) == 1 {
+	if len(args) == 0 {
 		usg.Base()
 		os.Exit(0)
 	}
@@ -50,7 +50,7 @@ func main() {
 			os.Exit(1)
 		}
 
-		server := srv.BblSrv{Port: pNum, MaxUsr: *maxUsr, MaxMsg: *maxMsg, MaxCh: *maxCh}
+		server := srv.Chatroom{Port: port, MaxUsr: *maxUsr, MaxMsg: *maxMsg, MaxCh: *maxCh}
 		server.Run()
 	} else if mode == clcStr {
 
