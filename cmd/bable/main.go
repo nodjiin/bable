@@ -2,7 +2,9 @@ package main
 
 import (
 	"os"
+	"strconv"
 
+	"github.com/nodjiin/bable/internal/pkg/srv"
 	"github.com/nodjiin/bable/internal/pkg/usg"
 )
 
@@ -34,7 +36,18 @@ func main() {
 			usg.UnkHelp(str)
 		}
 	} else if mode == srvStr {
+		// TODO flags
+		var server srv.BblSrv
+		port := os.Args[2] // change to account flags
 
+		pNum, err := strconv.Atoi(port)
+		if err == nil && (pNum >= 0 && pNum <= 65536) {
+			usg.InvPort(port)
+			os.Exit(1)
+		}
+
+		server.Port = pNum
+		server.Run()
 	} else if mode == clcStr {
 
 	} else {

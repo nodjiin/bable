@@ -14,8 +14,8 @@ Usage:
 	
 The modes are:
 
-	server	starts a local chatroom instance
-	client	connect to an existing chatroom 
+	server		starts a local chatroom instance
+	client		connect to an existing chatroom 
 	
 Use bable help <mode> for more information about a mode.`
 
@@ -27,10 +27,16 @@ func Help() {
 }
 
 func Srv() {
-	str := `Usage: bable server <port>
+	str := `Usage: bable server [flags] <port>
 	
 Starts a new server instance listening to <port>.
-The <port> must be open, inbound and outbound TCP traffic must be allowed.`
+The <port> must be open, inbound and outbound TCP traffic must be allowed.
+
+Available flags:
+
+	-mu		max number of users which can connect to the chatroom at the same time. Default is 10.
+	-mm		max number of messages that will be saved in the chatroom at any time. Default is 200.
+	-mc		max number of characters for a single message. Default is 1024.`
 	fmt.Println(str)
 }
 
@@ -43,9 +49,13 @@ Attempts to connect to an existing chatroom instance.`
 }
 
 func UnkMode(mode string) {
-	fmt.Printf("%s: Unknown mode\n Run 'bable' for help on usage", mode)
+	fmt.Printf("%s: Unknown mode\n Run 'bable' for help on usage\n", mode)
 }
 
 func UnkHelp(topic string) {
-	fmt.Printf("Unknown help topic '%s'. Run 'bable help'", topic)
+	fmt.Printf("Unknown help topic '%s'. Run 'bable help'\n", topic)
+}
+
+func InvPort(port string) {
+	fmt.Printf("Invalid port value %s. Port must be an integer between 0 and 65536.\n", port)
 }
